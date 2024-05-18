@@ -9,6 +9,7 @@ import { LoginSchema } from "@/schemas"
 import { getUserByEmail } from "./data/user";
 
 export default {
+  secret: "foo",
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
