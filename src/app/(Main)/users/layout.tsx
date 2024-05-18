@@ -8,6 +8,7 @@ const layout = ({ children }: LayoutProps) => {
     return (
         <Sidebar>
             <div className='h-full'>
+                Hello
                 {children}
             </div>
         </Sidebar>

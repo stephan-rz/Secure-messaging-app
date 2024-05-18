@@ -28,3 +28,24 @@ export const getUserById = async (id: string) => {
         return null;
     }
 }
+
+
+export const getUsers = async (userId: string) => {
+
+    try {
+        const users = await db.user.findMany({
+            orderBy: {
+                createdAt: "desc"
+            },
+            where: {
+                NOT: {
+                    id: userId
+                }
+            }
+        });
+        
+        return users;
+    } catch (error){
+        return [];
+    }
+}

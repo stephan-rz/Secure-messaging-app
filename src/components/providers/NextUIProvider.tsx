@@ -10,7 +10,7 @@ interface ProviderProps {
 
 export default function NextProvider({ children }: Readonly<ProviderProps>) {
     return (
-        <NextUIProvider>
+        <NextUIProvider className="h-full">
             {children}
         </NextUIProvider>
     );
