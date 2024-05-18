@@ -1,7 +1,7 @@
 name: Secure Messaging App CI
 env:
-  DATABASE_URL: ${{ secrets.AUTH_SECRET }}
   AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+  DATABASE_URL: ${{ secrets.AUTH_SECRET }}
   GITHUB_CLIENT_ID: ${{ secrets.MY_GITHUB_CLIENT_ID }}
   GITHUB_CLIENT_SECRET: ${{ secrets.MY_GITHUB_CLIENT_SECRET }}
   GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
@@ -28,6 +28,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+        
         cache: 'npm'
 
     - name: Run CI command
