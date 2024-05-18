@@ -23,7 +23,7 @@ const ConversationList = ({
     const { conversationId, isOpen } = useConversation();
 
     return (
-        <aside className={cn("fixed inset-y-0 pb-20 lg:pb-0 lg:left-20 lg:w-80 lg:block overflow-y-auto border-r border-zinc-800", isOpen ? "hiden" : "block w-full left-0")}>
+        <aside className={cn("fixed hidden inset-y-0 pb-20 lg:pb-0 lg:left-20 lg:w-80 lg:block overflow-y-auto border-r border-zinc-800", isOpen ? "hiden" : "block w-full left-0")}>
             <div className="px-5">
                 <div className="flex justify-between mb-4 pt-4">
                     <div className="text-2xl font-bold ">

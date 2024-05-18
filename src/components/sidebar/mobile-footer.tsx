@@ -20,7 +20,7 @@ const MobileFooter = () => {
         z-40
         flex
         items-center
-        bg-gray-900
+        bg-zinc-800
         border-t-[lpx]
         lg:hidden"
         >

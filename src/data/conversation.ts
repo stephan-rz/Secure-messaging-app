@@ -32,3 +32,26 @@ export const getConversations = async () => {
         return []
     }
 }
+
+
+export const getConversationById = async (conversationId: string) => {
+    const user = await currentUser();
+    if (!user?.id) return null;
+
+    try {
+
+        const conversation = await db.conversation.findUnique({
+            where: {
+                id: conversationId
+            },
+            include: {
+                users: true,
+            }
+        });
+
+        return conversation;
+
+    } catch (error) {
+        return null;
+    }
+}
