@@ -5,7 +5,6 @@
  */
 
 export const publicRoutes = [
-    "/",
     "/verify-email",
     "/reset-password",
     "/change-password"
@@ -41,4 +40,4 @@ export const apiAuthPrefix = "/api/auth";
  */
 
 
-export const DEFAULT_LOGIN_REDIRECT = "/settings";
+export const DEFAULT_LOGIN_REDIRECT = "/";

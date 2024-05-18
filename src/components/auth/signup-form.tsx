@@ -115,7 +115,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({ className, ...props }) => {
                     {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
                     Sign Up
                 </Button>
-                <Link href="/login" className="text-sm text-center">Already have an account? Log in</Link>
+                <p className="text-sm text-center">Already have an account? <Link href="/login" className="hover:text-primary">Log in</Link></p>
             </form>
         </div>
     )
