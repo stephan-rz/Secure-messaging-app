@@ -13,7 +13,7 @@ async function Sidebar({ children }: Readonly<SidebarProps>) {
         <div className="h-full">
             <DesktopSidebar user={user as any} />
             <MobileFooter />
-            <main className="lg:pl-24 h-full">
+            <main className="lg:pl-20 h-full">
                 {children}
             </main>
         </div>

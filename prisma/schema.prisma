@@ -74,7 +74,7 @@ model PasswordResetToken {
 model Conversation {
   id       String   @id @default(auto()) @map("_id") @db.ObjectId
   name     String?
-  isGroupd Boolean?
+  isGroup Boolean?
 
   createdAt     DateTime @default(now())
   lastMessageAt DateTime @default(now())
