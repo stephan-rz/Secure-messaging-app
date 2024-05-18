@@ -14,8 +14,8 @@ export const SocialLoginButtons = () => {
 
     return (
         <>
-            <Button variant='bordered' startContent={<Icons.googleIcon />} className='w-full' onClick={() => onClick("google")}>Continue with Google</Button>
-            <Button variant='bordered' startContent={<Icons.githubIcon />} className='w-full' onClick={() => onClick("github")}>Continue with Github</Button>
+            <Button variant='bordered' startContent={<Icons.GoogleIcon />} className='w-full' onClick={() => onClick("google")}>Continue with Google</Button>
+            <Button variant='bordered' startContent={<Icons.GithubIcon />} className='w-full' onClick={() => onClick("github")}>Continue with Github</Button>
         </>
     )
 }

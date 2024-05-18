@@ -1,19 +1,16 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
-import NavBar from '@/components/NavBar'
 import { FC, ReactNode } from 'react'
 
-interface layoutProps {
+interface LayoutProps {
     children: ReactNode
 }
 
-const layout: FC<layoutProps> = ({ children }: layoutProps) => {
-    return <>
-        <NavBar />
+const layout: FC<LayoutProps> = ({ children }: LayoutProps) => {
+    return (
         <MaxWidthWrapper>
             <main>{children}</main>
         </MaxWidthWrapper>
-
-    </>
+    )
 }
 
 export default layout

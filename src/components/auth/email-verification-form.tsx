@@ -11,7 +11,7 @@ import Link from "next/link";
 
 export const EmailVerificationForm = () => {
     const [error, setError ] = useState<string | undefined>();
-    const [success, setsuccess ] = useState<string | undefined>();
+    const [success, setSuccess] = useState<string | undefined>();
 
     const searchParams = useSearchParams();
 
@@ -25,7 +25,7 @@ export const EmailVerificationForm = () => {
 
         EmailVerification(token)
         .then((data) => {
-            setsuccess(data.success);
+            setSuccess(data.success);
             setError(data.error);
         })
         .catch(() => {

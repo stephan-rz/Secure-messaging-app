@@ -8,7 +8,7 @@ interface ProviderProps {
     children: React.ReactNode;
 }
 
-export default function NextProvider({ children }: ProviderProps) {
+export default function NextProvider({ children }: Readonly<ProviderProps>) {
     return (
         <NextUIProvider>
             {children}
