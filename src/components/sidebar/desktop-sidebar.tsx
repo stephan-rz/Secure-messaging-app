@@ -15,7 +15,7 @@ const DesktopSidebar = ({ user }: DesktopSidebarProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="hidden h-full lg:fixed lg:inset-y-Ø lg:left-0 lg:z-4Ø lg:w-2Ø xl:px-6 lg:overflow-y-auto lg:bg-zinc-900 lg:border-r-[lpx] lg:pb-4 lg:flex lg:flex-col justify-between"
+        <div className="hidden h-full lg:fixed lg:inset-y-0 lg:left-0 lg:z-4Ø lg:w-20 xl:px-6 lg:overflow-y-auto lg:bg-zinc-900 lg:border-r-[lpx] lg:pb-4 lg:flex lg:flex-col justify-between"
         >
             <nav className="mt-4 flex flex-col justify-between">
                 <ul className="flex flex-col items-center space-y-1">
