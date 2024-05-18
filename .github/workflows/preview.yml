@@ -1,4 +1,4 @@
-name: Secure Messaging App CI
+name: Secure Messaging App Preview CI
 env:
   AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
   DATABASE_URL: ${{ secrets.AUTH_SECRET }}
