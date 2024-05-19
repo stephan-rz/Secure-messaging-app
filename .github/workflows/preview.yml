@@ -12,6 +12,8 @@ env:
   PUSHER_APP_ID: ${{ secrets.PUSHER_APP_ID }}
   PUSHER_APP_KEY: ${{ secrets.PUSHER_APP_KEY }}
   PUSHER_APP_SECRET: ${{ secrets.PUSHER_APP_SECRET }}
+  UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+  UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
   
 on:
   push:

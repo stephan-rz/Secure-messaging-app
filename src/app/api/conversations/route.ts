@@ -3,10 +3,24 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { pusherServer } from "@/lib/pusher";
 
+import { Ratelimit } from '@upstash/ratelimit';
+import { redis } from '@/lib/upstash';
+import { headers } from 'next/headers';
+
+const rateLimit = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(5, "120s")
+})
+
 export async function POST(
     request: Request
 ) {
     try {
+        const ip = headers().get('x-forwarded-for');
+        const { success: limitReached } = await rateLimit.limit(ip!);
+
+        if (!limitReached) return new NextResponse('Too Many Attempts', { status: 429 });
+
         const user = await currentUser();
         const body = await request.json();
         const {
@@ -46,7 +60,7 @@ export async function POST(
             })
 
             return NextResponse.json(newConversation)
-        } 
+        }
 
         const existingConversations = await db.conversation.findMany({
             where: {
@@ -90,7 +104,7 @@ export async function POST(
         })
 
         newConversation.users.map((user) => {
-            if(user.email) {
+            if (user.email) {
                 pusherServer.trigger(user.email, 'conversation:new', newConversation)
             }
         })

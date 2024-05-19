@@ -2,6 +2,14 @@ import { currentUser } from "@/lib/current-user";
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { pusherServer } from "@/lib/pusher";
+import { Ratelimit } from '@upstash/ratelimit';
+import { redis } from '@/lib/upstash';
+import { headers } from 'next/headers';
+
+const rateLimit = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(15, "60s")
+})
 
 export async function POST(
     request: Request
@@ -10,6 +18,11 @@ export async function POST(
     if (!user) return new NextResponse('Unauthorized', { status: 401 })
 
     try {
+        const ip = headers().get('x-forwarded-for');
+        const { success: limitReached } = await rateLimit.limit(ip!);
+
+        if (!limitReached) return new NextResponse('Too Many Attempts', { status: 429 });
+
         const body = await request.json();
         const { message, image, conversationId } = body;
 

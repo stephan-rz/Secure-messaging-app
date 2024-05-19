@@ -8,12 +8,26 @@ import { SignUpSchema } from '@/schemas';
 import { getUserByEmail } from '@/data/user';
 import { generateVerificationToken } from '@/lib/tokens';
 import { sendVerificationEmail } from '@/lib/mail';
+import { Ratelimit } from '@upstash/ratelimit';
+import { redis } from '@/lib/upstash';
+import { headers } from 'next/headers';
 
-export const SignUp = async (values: z.infer<typeof SignUpSchema >) => {
+const rateLimit = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(5, "120s")
+})
+
+
+export const SignUp = async (values: z.infer<typeof SignUpSchema>) => {
+    const ip = headers().get('x-forwarded-for');
+    const { success: limitReached } = await rateLimit.limit(ip!);
+
+    if (!limitReached) return { error: 'Too Many Sign-Up Attempts' };
+
     const validatedFields = SignUpSchema.safeParse(values);
 
     if (!validatedFields.success) {
-        return { error: "Invalid fields!"};
+        return { error: "Invalid fields!" };
     }
 
     const { email, password, name } = validatedFields.data;

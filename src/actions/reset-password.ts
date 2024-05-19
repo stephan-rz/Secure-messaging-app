@@ -7,7 +7,22 @@ import { getUserByEmail } from "@/data/user"
 import { sendPasswordResetEmail } from '@/lib/mail'
 import { generatePasswordResetToken } from '@/lib/tokens'
 
+import { Ratelimit } from '@upstash/ratelimit';
+import { redis } from '@/lib/upstash';
+import { headers } from 'next/headers';
+
+const rateLimit = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(5, "120s")
+})
+
 export const reset = async (values: z.infer<typeof ResetSchema>) => {
+    const ip = headers().get('x-forwarded-for');
+    const { success: limitReached } = await rateLimit.limit(ip!);
+
+    if (!limitReached) return { error: 'Too Many Attempts' };
+
+
     const validatedFileds = ResetSchema.safeParse(values);
 
     if (!validatedFileds.success) {
