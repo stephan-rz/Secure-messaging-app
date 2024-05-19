@@ -3,8 +3,22 @@
 import { db } from "@/lib/db"
 import { getUserByEmail } from "@/data/user"
 import { getVerificationTokenByToken } from "@/data/verification-token"
+import { Ratelimit } from '@upstash/ratelimit';
+import { redis } from '@/lib/upstash';
+import { headers } from 'next/headers';
+
+const rateLimit = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(5, "120s")
+})
+
 
 export const EmailVerification = async (token: string) => {
+    const ip = headers().get('x-forwarded-for');
+    const { success: limitReached } = await rateLimit.limit(ip!);
+
+    if (!limitReached) return { error: 'Too Many Attempts' };
+
     const existingToken = await getVerificationTokenByToken(token);
 
     if (!existingToken) {

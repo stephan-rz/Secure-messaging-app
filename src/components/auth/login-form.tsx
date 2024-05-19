@@ -88,7 +88,7 @@ export const LoginForm: FC<LoginFormProps> = ({ className, ...props }) => {
                     errorMessage={form.formState.errors.password?.message}
                 />
                 <div className="flex justify-between text-sm">
-                    <Checkbox size="sm" disabled={isPending}>Remember me</Checkbox>
+                    <Checkbox size="sm" defaultSelected disabled={isPending}>Remember me</Checkbox>
                     <Link href="/reset-password" className="hover:text-primary">Forgot Password?</Link>
 
                 </div>

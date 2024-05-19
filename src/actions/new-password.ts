@@ -7,12 +7,24 @@ import { getUserByEmail } from "@/data/user"
 
 import bcryptjs from "bcryptjs"
 import { db } from "@/lib/db"
+import { Ratelimit } from '@upstash/ratelimit';
+import { redis } from '@/lib/upstash';
+import { headers } from 'next/headers';
 
+const rateLimit = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(5, "120s")
+})
 
 export const newPassword = async (
     values: z.infer<typeof NewPasswordSchema>,
     token?: string | null
 ) => {
+    const ip = headers().get('x-forwarded-for');
+    const { success: limitReached } = await rateLimit.limit(ip!);
+
+    if (!limitReached) return { error: 'Too Many Attempts' };
+
     if(!token) {
         return { error: "Missing token!" }
     }
