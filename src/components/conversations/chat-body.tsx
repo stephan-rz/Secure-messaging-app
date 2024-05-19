@@ -23,7 +23,7 @@ const ChatBody = ({ initialMessages }: ChatBodyProps) => {
     }, [conversationId]);
 
     useEffect(() => {
-        pusherClient.subscribe(conversationId[0]);
+        pusherClient.subscribe(conversationId as string);
         bottomRef?.current?.scrollIntoView();
 
         const messageHandler = (message: FullMessageType) => {
