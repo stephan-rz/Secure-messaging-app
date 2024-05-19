@@ -5,6 +5,7 @@ import axios from "axios"
 import { useRouter } from "next/navigation"
 import { useCallback, useState } from "react"
 import { Avatar } from "@nextui-org/avatar";
+import LoadingModal from "../modals/loading-modal"
 
 interface UserBoxProps {
     data: User
@@ -28,6 +29,10 @@ const UserBox = ({ data }: UserBoxProps) => {
     }, [data, router])
 
     return (
+        <>
+        {isLoading && (
+            <LoadingModal />
+        )}
         <button onClick={handleClick} className="w-full relative flex items-center space-x-3 bg-zinc-900 p-3 hover:bg-zinc-800 rounded-lg transition cursor-pointer">
             <div className="relative">
                 <Avatar src={data?.image as string} alt="avatar" showFallback/>
@@ -41,7 +46,7 @@ const UserBox = ({ data }: UserBoxProps) => {
                 </div>
             </div>
         </button>
-
+        </>
     )
 }
 

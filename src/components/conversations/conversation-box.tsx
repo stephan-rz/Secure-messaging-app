@@ -66,7 +66,7 @@ const ConversationBox = ({
             </div>
             <div className="min-w-0 flex-1">
                 <div className="focus:outline-none">
-                    <div className="flex justify-between items-center mb-1">
+                    <div className="flex justify-between gap-3 items-center mb-1">
                         <p className="text-md truncate font-medium text-white">{data.name || otherUser.name}</p>
                         {lastMessage?.createdAt && (
                             <p className="text-xs text-white/50 font-light">
