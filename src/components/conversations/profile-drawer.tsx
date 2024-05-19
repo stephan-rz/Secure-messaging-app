@@ -9,6 +9,7 @@ import { Trash2, X } from "lucide-react";
 import { useMemo, Fragment, useState } from "react";
 import Modal from "../modal";
 import DeleteConfirmModal from "../modals/conversation-delete-confirm-modal";
+import { UserAvatar } from "../avatar";
 
 
 interface ProfileDrawerProps {
@@ -73,10 +74,7 @@ const ProfileDrawer = ({
                                             <div className="relative mt-6 flex-1 px-4 sm:px-6">
                                                 <div className="flex flex-col items-center">
                                                     <div className="mb-2">
-                                                        <div className="relative">
-                                                            <Avatar size="lg" src={otherUser?.image as string} alt="avatar" showFallback />
-                                                            <span className="absolute block rounded-full bg-green-500 ring-2 ring-white top-[5px] right-[5px] h-2 w-2 md:h-2 md:w-2" />
-                                                        </div>
+                                                        <UserAvatar user={otherUser} />
                                                     </div>
                                                     <div>
                                                         {title}

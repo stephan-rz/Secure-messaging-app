@@ -6,6 +6,7 @@ import { FullMessageType } from "@/types"
 import { Avatar } from "@nextui-org/react";
 import { format } from "date-fns";
 import Image from "next/image";
+import { UserAvatar } from "../avatar";
 
 interface MessageBoxProps {
     data: FullMessageType;
@@ -45,10 +46,7 @@ const MessageBox = ({
     return (
         <div className={container}>
             <div className={avatar}>
-                <div className="relative">
-                    <Avatar src={data?.sender.image as string} alt="avatar" showFallback />
-                    <span className="absolute block rounded-full bg-green-500 ring-2 ring-white top-[2px] right-[2px] h-2 w-2 md:h-2 md:w-2" />
-                </div>
+                <UserAvatar user={data.sender} />
             </div>
             <div className={body}>
                 <div className="flex items-center gap-2">

@@ -1,12 +1,12 @@
 "use client"
 
 import useOtherUser from "@/hooks/use-other-user";
-import { Avatar } from "@nextui-org/react";
 import { Conversation, User } from "@prisma/client";
 import { ArrowLeft, Ellipsis } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import ProfileDrawer from "./profile-drawer";
+import { UserAvatar } from "../avatar";
 
 interface ChatHeaderProps {
     conversation: Conversation & {
@@ -38,10 +38,7 @@ const ChatHeader = ({ conversation }: ChatHeaderProps) => {
                     <Link href="/conversations" className="lg:hidden block text-white hover:text-primary transition cursor-pointer">
                         <ArrowLeft size={24} />
                     </Link>
-                    <div className="relative">
-                        <Avatar src={otherUser?.image as string} alt="avatar" showFallback />
-                        <span className="absolute block rounded-full bg-green-500 ring-2 ring-white top-[2px] right-[2px] h-2 w-2 md:h-2 md:w-2" />
-                    </div>
+                    <UserAvatar user={otherUser} />
                     <div className="flex flex-col">
                         <div className="truncate">
                             {conversation.name || otherUser.name}
