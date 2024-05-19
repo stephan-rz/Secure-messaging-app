@@ -90,13 +90,15 @@ const ConversationList = ({
                         <Users />
                     </div>
                 </div>
-                {items.map((item) => (
-                    <ConversationBox
-                        key={item.id}
-                        data={item}
-                        selected={conversationId === item.id}
-                    />
-                ))}
+                <div className="flex flex-col gap-3">
+                    {items.map((item) => (
+                        <ConversationBox
+                            key={item.id}
+                            data={item}
+                            selected={conversationId === item.id}
+                        />
+                    ))}
+                </div>
             </div>
         </aside>
     )
