@@ -29,6 +29,23 @@ model User {
 
   accounts Account[]
   messages Message[]
+  sessions Session[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Session {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String  @db.ObjectId
+  ipAddress  String?
+  deviceInfo Json?
+  isBot      Boolean?
+  browser    Json?
+  os         Json?
+  userAgent  String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

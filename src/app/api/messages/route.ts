@@ -1,11 +1,12 @@
 import { currentUser } from "@/lib/current-user";
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
+import { pusherServer } from "@/lib/pusher";
 
 export async function POST(
     request: Request
 ) {
-    const user = await currentUser();
+    const user: any = await currentUser();
     if (!user) return new NextResponse('Unauthorized', { status: 401 })
 
     try {
@@ -59,6 +60,19 @@ export async function POST(
                 }
             }
         });
+
+
+        await pusherServer.trigger(conversationId, 'messages:new', newMessage);
+
+        const lastMessage = updatedConversation.messages[updatedConversation.messages.length - 1];
+
+        updatedConversation.users.map((user) => {
+            pusherServer.trigger(user.email!, 'conversation:update', {
+                id: conversationId,
+                message: [lastMessage]
+            })
+        })
+
 
 
         return NextResponse.json(newMessage)

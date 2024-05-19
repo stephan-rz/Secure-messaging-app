@@ -52,7 +52,7 @@ const MessageBox = ({
             </div>
             <div className={body}>
                 <div className="flex items-center gap-2">
-                    <div className="text-sm truncate w-[150px] text-white/80">
+                    <div className="text-sm truncate max-w-[150px] text-white/80">
                         {data.sender.name}
                     </div>
                     <div className="text-sm text-white/50">
@@ -74,7 +74,11 @@ const MessageBox = ({
                         </div>
                     )}
                 </div>
-
+                {isLast && isOwn && seenList.length > 0 && (
+                    <div className="text-xs font-light truncate text-white/30">
+                        {`Seen by ${seenList}`}
+                    </div>
+                )}
             </div>
         </div>
     )
