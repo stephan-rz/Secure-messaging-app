@@ -32,7 +32,7 @@ export const authRoutes = [
  */
 
 
-export const apiAuthPrefix = "/api";
+export const apiAuthPrefix = "/api/auth";
 
 /**
  * The default redirect route after a successful login
