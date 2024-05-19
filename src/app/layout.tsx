@@ -23,7 +23,7 @@ export default function RootLayout({
           <NextProvider>
             {children}
           </NextProvider>
-        </SessionProvider>
+        </SessionProvider> 
       </body>
     </html>
   );
