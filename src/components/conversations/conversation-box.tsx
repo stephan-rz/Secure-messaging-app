@@ -60,7 +60,7 @@ const ConversationBox = ({
     }, [lastMessage]);
 
     return (
-        <button onClick={handleClick} className={cn("w-full relative flex items-center space-x-3 p-3 hover:bg-zinc-700 rounded-lg transition cursor-pointer", selected ? "bg-zinc-800" : "bg-zinc-900")}>
+        <button onClick={handleClick} className={cn("w-full relative flex items-center space-x-3 p-3 hover:bg-zinc-800 rounded-lg transition cursor-pointer", selected ? "bg-zinc-800" : "")}>
             <UserAvatar user={otherUser} />
             <div className="min-w-0 flex-1">
                 <div className="focus:outline-none">

@@ -16,7 +16,7 @@ const UserList = ({ items }: UserListProps) => {
                     People
                 </div>
             </div>
-            <div className="px-3">
+            <div className="flex flex-col gap-3 px-3">
                 {items.map((item) => (
                     <UserBox
                         key={item.id}

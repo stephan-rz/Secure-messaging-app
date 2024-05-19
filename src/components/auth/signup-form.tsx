@@ -55,6 +55,7 @@ export const SignUpForm: FC<SignUpFormProps> = ({ className, ...props }) => {
                     setSuccess(data.success);
                 })
         })
+        form.reset();
     }
 
     return (
