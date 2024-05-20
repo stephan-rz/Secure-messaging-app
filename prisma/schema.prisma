@@ -36,8 +36,8 @@ model User {
 }
 
 model Session {
-  id         String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId     String  @db.ObjectId
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @db.ObjectId
   ipAddress  String?
   deviceInfo Json?
   isBot      Boolean?
@@ -89,8 +89,8 @@ model PasswordResetToken {
 }
 
 model Conversation {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  name     String?
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  name    String?
   isGroup Boolean?
 
   createdAt     DateTime @default(now())
@@ -105,7 +105,7 @@ model Conversation {
 
 model Message {
   id    String  @id @default(auto()) @map("_id") @db.ObjectId
-  body  String?
+  body  Json?
   image String?
 
   seenIds String[] @db.ObjectId
@@ -114,8 +114,8 @@ model Message {
   conversationId String       @db.ObjectId
   conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
 
-  senderId String  @db.ObjectId
-  sender   User    @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  senderId String @db.ObjectId
+  sender   User   @relation(fields: [senderId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
 }

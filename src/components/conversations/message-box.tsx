@@ -3,13 +3,14 @@
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { cn } from "@/lib/utils";
 import { FullMessageType } from "@/types"
-import { Avatar } from "@nextui-org/react";
 import { format } from "date-fns";
 import Image from "next/image";
 import { UserAvatar } from "../avatar";
 
 interface MessageBoxProps {
-    data: FullMessageType;
+    data: FullMessageType & {
+        content?: string
+    };
     isLast?: boolean;
 }
 
@@ -68,7 +69,7 @@ const MessageBox = ({
                         />
                     ): (
                         <div>
-                            {data.body}
+                            {data.content}
                         </div>
                     )}
                 </div>
