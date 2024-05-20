@@ -39,9 +39,9 @@ const MessageBox = ({
     )
 
     const message = cn(
-        "text-sm w-fit overflow-hidden",
+        "text-sm w-fit overflow-hidden max-w-full xl:max-w-[50%]",
         isOwn ? "bg-primary text-white" : "bg-zinc-800 text-white",
-        data.image ? "rounded-md p-0" : "rounded-full py-2 px-3"
+        data.image ? "rounded-md p-0" : "rounded-md py-2 px-3"
     )
 
     return (

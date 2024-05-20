@@ -7,6 +7,7 @@ import { Button, Input } from "@nextui-org/react";
 import axios from "axios";
 import { Image as ImageIcon, SendHorizonal } from "lucide-react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const ChatForm = () => {
     const { conversationId } = useConversation();
@@ -23,6 +24,13 @@ const ChatForm = () => {
         axios.post('/api/messages', {
             ...values,
             conversationId
+        }).then((response) => {
+            if(response?.data.spam) {
+                toast.error(
+                    response?.data.message,
+                    { duration: 5000 }
+                )
+            }
         })
     }
 
