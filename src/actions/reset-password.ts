@@ -20,7 +20,7 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
     const ip = headers().get('x-forwarded-for');
     const { success: limitReached } = await rateLimit.limit(ip!);
 
-    if (!limitReached) return { error: 'Too Many Attempts' };
+    if (!limitReached) return { error: 'Too many attempts, please try again later.' };
 
 
     const validatedFileds = ResetSchema.safeParse(values);

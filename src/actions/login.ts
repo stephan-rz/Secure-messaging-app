@@ -24,7 +24,7 @@ export const Login = async (values: z.infer<typeof LoginSchema>) => {
     const ip = headers().get('x-forwarded-for');
     const { success: limitReached } = await rateLimit.limit(ip!);
 
-    if (!limitReached) return { error: 'Too Many Login Attempts' };
+    if (!limitReached) return { error: 'Too many attempts, please try again later.' };
 
     const validatedFields = LoginSchema.safeParse(values);
 

@@ -16,12 +16,14 @@ import { FormSuccess } from "../form/form-success";
 import { Login } from "@/actions/login";
 import { Loader2 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3"
+import { Recaptcha } from "@/actions/recaptcha";
 
 interface LoginFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export const LoginForm: FC<LoginFormProps> = ({ className, ...props }) => {
     const searchParams = useSearchParams();
-    const urlError = searchParams?.get("error") === "OAuthAccountNotLinked" 
+    const urlError = searchParams?.get("error") === "OAuthAccountNotLinked"
         ? "Email already in use with different provider!"
         : "";
 
@@ -29,6 +31,8 @@ export const LoginForm: FC<LoginFormProps> = ({ className, ...props }) => {
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
     const [isPending, startTransition] = useTransition();
+
+    const { executeRecaptcha } = useGoogleReCaptcha();
 
     const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -40,19 +44,35 @@ export const LoginForm: FC<LoginFormProps> = ({ className, ...props }) => {
         }
     })
 
-    const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+    const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
         setError("");
         setSuccess("");
 
-        startTransition(() => {
-            Login(values)
-                .then((data: any) => {
-                    setSuccess(data?.success);
-                    setError(data?.error);
+        if (!executeRecaptcha) return setError("Recaptcha not loaded!");
 
-                    // TODO: add hen we add 2FA
+        const gRecaptchaToken = await executeRecaptcha('loginSubmit');
+
+        startTransition(() => {
+            Recaptcha(gRecaptchaToken)
+                .then((data: any) => {
+                    if (data?.error) {
+                        setError(data.error);
+                    }
+                    if (data?.success) {
+                        startTransition(() => {
+                            Login(values)
+                                .then((data: any) => {
+                                    setSuccess(data?.success);
+                                    setError(data?.error);
+
+                                    // TODO: add hen we add 2FA
+                                })
+                        })
+                    }
                 })
         })
+
+
     }
 
     return (

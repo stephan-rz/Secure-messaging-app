@@ -188,11 +188,11 @@ const VerificationEmail = ({ confirmLink }: VerificationEmailProps) => {
                                                                 <div align="center" class="alignment"
                                                                     style="line-height:10px">
                                                                     <div style="display: flex;"><img
-																			alt="Company Logo"
-																			src="https://utfs.io/f/8af8ffa1-aca3-4f7d-bd72-186e281a646f-p9ncwr.png"
+																			alt="App Logo"
+																			src="https://utfs.io/f/5ef4c443-b057-4709-807b-53f67546ee2f-4o63ls.png"
 																			style="display: block; height: fit-content; border: 0; width: 120px; margin-right:20px;"
 																			title="Company Logo" width="80" />
-																			<h1 style="color:white; line-height: 1.2em; text-align: left; font-family:Arial, Helvetica, sans-serif;">WP Vulnerability Scanner</h1>
+																			<h1 style="color:white; line-height: 1.2em; text-align: left; font-family:Arial, Helvetica, sans-serif;">Secure Messaging App</h1>
 																	</div>
                                                                 </div>
                                                             </td>
