@@ -22,7 +22,7 @@ export const SignUp = async (values: z.infer<typeof SignUpSchema>) => {
     const ip = headers().get('x-forwarded-for');
     const { success: limitReached } = await rateLimit.limit(ip!);
 
-    if (!limitReached) return { error: 'Too Many Sign-Up Attempts' };
+    if (!limitReached) return { error: 'Too many attempts, please try again later.' };
 
     const validatedFields = SignUpSchema.safeParse(values);
 
@@ -50,5 +50,5 @@ export const SignUp = async (values: z.infer<typeof SignUpSchema>) => {
     const verificationToken = await generateVerificationToken(email);
     await sendVerificationEmail(verificationToken.email, verificationToken.token);
 
-    return { success: "Email verification sent! PLease check inbox." };
+    return { success: "Email verification sent! Please check inbox." };
 };

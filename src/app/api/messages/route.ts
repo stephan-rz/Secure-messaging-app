@@ -22,7 +22,7 @@ export async function POST(
         const ip = headers().get('x-forwarded-for');
         const { success: limitReached } = await rateLimit.limit(ip!);
 
-        if (!limitReached) return new NextResponse('Too Many Attempts', { status: 429 });
+        if (!limitReached) return new NextResponse('Too many attempts, please try again later.', { status: 429 });
 
         const body = await request.json();
         const { message, image, conversationId } = body;

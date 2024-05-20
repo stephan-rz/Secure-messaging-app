@@ -23,7 +23,7 @@ export const newPassword = async (
     const ip = headers().get('x-forwarded-for');
     const { success: limitReached } = await rateLimit.limit(ip!);
 
-    if (!limitReached) return { error: 'Too Many Attempts' };
+    if (!limitReached) return { error: 'Too many attempts, please try again later.' };
 
     if(!token) {
         return { error: "Missing token!" }
