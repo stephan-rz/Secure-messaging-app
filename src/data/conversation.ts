@@ -31,7 +31,7 @@ export const getConversations = async () => {
             ...conversation,
             messages: conversation.messages.map(message => ({
                 ...message,
-                body: decryptMessage(message.body) // Decrypt message body
+                content: decryptMessage(message.body) 
             }))
         }));
 

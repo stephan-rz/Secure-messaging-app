@@ -2,13 +2,11 @@
 
 import { useCallback, useMemo } from "react"
 import { useRouter } from "next/navigation"
-import { Conversation, Message, User } from "@prisma/client"
 import { format } from "date-fns"
 import { FullConversationType } from "@/types"
 import useOtherUser from "@/hooks/use-other-user"
 import { useCurrentUser } from "@/hooks/use-current-user"
 import { cn } from "@/lib/utils"
-import { Avatar } from "@nextui-org/react"
 import { UserAvatar } from "../avatar"
 
 interface ConversationBoxProps {
@@ -52,8 +50,8 @@ const ConversationBox = ({
             return 'Sent an image'
         }
 
-        if (lastMessage?.body) {
-            return lastMessage.body
+        if (lastMessage?.content) {
+            return lastMessage.content
         }
 
         return "Started a conversation"
