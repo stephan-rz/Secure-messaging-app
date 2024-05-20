@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 
-const secretKey = process.env.ENCRYPTION_SECRET_KEY;
+const secretKey = process.env.ENCRYPTION_SECRET_KEY || "64e9036f31371625c84dc9518b703d062fa2ee9058e1c6b8094cb611d410068b";
 if (!secretKey || secretKey.length !== 64) {
     throw new Error('SECRET_KEY must be 64 hex characters (32 bytes)');
 }
