@@ -21,7 +21,7 @@ interface LoginFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export const LoginForm: FC<LoginFormProps> = ({ className, ...props }) => {
     const searchParams = useSearchParams();
-    const urlError = searchParams.get("error") === "OAuthAccountNotLinked" 
+    const urlError = searchParams?.get("error") === "OAuthAccountNotLinked" 
         ? "Email already in use with different provider!"
         : "";
 
