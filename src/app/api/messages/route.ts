@@ -5,6 +5,7 @@ import { pusherServer } from "@/lib/pusher";
 import { Ratelimit } from '@upstash/ratelimit';
 import { redis } from '@/lib/upstash';
 import { headers } from 'next/headers';
+import { encryptMessage } from "@/lib/encryption";
 
 const rateLimit = new Ratelimit({
     redis,
@@ -25,10 +26,11 @@ export async function POST(
 
         const body = await request.json();
         const { message, image, conversationId } = body;
+        const encryptedMessage = encryptMessage(message);
 
         const newMessage = await db.message.create({
             data: {
-                body: message,
+                body: encryptedMessage,
                 image,
                 conversation: {
                     connect: {
@@ -74,14 +76,18 @@ export async function POST(
             }
         });
 
-        await pusherServer.trigger(conversationId, 'messages:new', newMessage);
+        await pusherServer.trigger(conversationId, 'messages:new', {
+            ...newMessage,
+            content: message
+        });
 
         const lastMessage = updatedConversation.messages[updatedConversation.messages.length - 1];
 
         updatedConversation.users.map((user) => {
             pusherServer.trigger(user.email!, 'conversation:update', {
                 id: conversationId,
-                message: [lastMessage]
+                message: [lastMessage],
+                content: message
             })
         })
 

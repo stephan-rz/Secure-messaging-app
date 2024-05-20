@@ -1,5 +1,6 @@
 import { currentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { decryptMessage } from "@/lib/encryption";
 import { pusherServer } from "@/lib/pusher";
 import { NextResponse } from "next/server";
 
@@ -62,6 +63,8 @@ export async function POST(
             }
         });
 
+        const message = decryptMessage(updatedMessage.body);
+
         await pusherServer.trigger(user?.email as string, 'conversation:update' , {
             id: conversationId,
             message: [updatedMessage]
@@ -71,7 +74,10 @@ export async function POST(
             return NextResponse.json(conversation);
         }
 
-        await pusherServer.trigger(conversationId!, 'message:update', updatedMessage);
+        await pusherServer.trigger(conversationId!, 'message:update', {
+            ...updatedMessage,
+            content: message
+        });
 
         return NextResponse.json(updatedMessage);
 

@@ -1,5 +1,6 @@
 import { currentUser } from "@/lib/current-user"
 import { db } from "@/lib/db";
+import { decryptMessage } from "@/lib/encryption";
 
 export const getConversations = async () => {
     const user = await currentUser();
@@ -26,7 +27,15 @@ export const getConversations = async () => {
             }
         })
 
-        return conversations;
+        const decryptedConversations = conversations.map(conversation => ({
+            ...conversation,
+            messages: conversation.messages.map(message => ({
+                ...message,
+                body: decryptMessage(message.body) // Decrypt message body
+            }))
+        }));
+
+        return decryptedConversations;
 
     } catch (error) {
         return []
