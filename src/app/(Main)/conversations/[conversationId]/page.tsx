@@ -27,6 +27,7 @@ const ConversationId = async ({params}: {params: IParams}) => {
                 <ChatHeader conversation={conversation}/>
                 <ChatBody initialMessages={messages}/>
                 <ChatForm />
+                
             </div>
         </div>
     )
