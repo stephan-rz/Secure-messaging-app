@@ -51,7 +51,7 @@ To get a local copy up and running, follow these simple steps.
 
 ### Prerequisites
 
-- Node.js (>= 14.x)
+- Node.js (>= 18.x)
 - MongoDB
 - Pusher account for real-time communication
 
@@ -76,6 +76,8 @@ To get a local copy up and running, follow these simple steps.
    DATABASE_URL="mongodb+srv://<username>:<password>@cluster0.mongodb.net/secure-messaging-app"
 
    NEXTAUTH_SECRET="<your_nextauth_secret>"
+   AUTH_TRUST_HOST=true
+   AUTH_URL="http://localhost:3000"
 
    NEXT_PUBLIC_PUSHER_APP_KEY="<your_pusher_app_key>"
    PUSHER_APP_ID="<your_pusher_app_id>"
@@ -99,17 +101,20 @@ To get a local copy up and running, follow these simple steps.
    NEXT_PUBLIC_RECAPTCHA_KEY="<your_recaptcha_key>"
    RECAPTCHA_SECRET_KEY="<your_recaptcha_secret_key>"
 
+   ML_MODEL_URL="http://localhost:3005"
+
     ```
 
-4. **Run database migrations** 
+4. **Run prisma generate** 
     ```bash
-    npx prisma migrate dev --name init
+    npx prisma generate
     ```
 
-5. **Start the development server** 
+5. **Build the web app and run** 
     ```bash
-    npm run dev
+    npm run build && npm start
     ```
+
 6. **Open your browser** 
    
     Visit http://localhost:3000 to see the app in action.
