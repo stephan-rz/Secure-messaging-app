@@ -28,7 +28,7 @@ export async function POST(
         const body = await request.json();
         const { message, image, conversationId } = body;
 
-        const classify = await axios.post('http://localhost:8000/api/classify', {
+        const classify = await axios.post(`${process.env.ML_MODEL_URL}/api/classify`, {
             "message": message
         })
 
