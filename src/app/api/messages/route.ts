@@ -6,6 +6,7 @@ import { Ratelimit } from '@upstash/ratelimit';
 import { redis } from '@/lib/upstash';
 import { headers } from 'next/headers';
 import { encryptMessage } from "@/lib/encryption";
+import axios from "axios";
 
 const rateLimit = new Ratelimit({
     redis,
@@ -26,6 +27,15 @@ export async function POST(
 
         const body = await request.json();
         const { message, image, conversationId } = body;
+
+        const classify = await axios.post(`${process.env.ML_MODEL_URL}/api/classify`, {
+            "message": message
+        })
+
+        if (classify.data === true) {
+            return NextResponse.json({ message: 'Spam detected!', spam: true }, { status: 200 })
+        }
+
         const encryptedMessage = encryptMessage(message);
 
         const newMessage = await db.message.create({

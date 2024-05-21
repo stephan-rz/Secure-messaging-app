@@ -3,7 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import NextProvider from "@/components/providers/NextUIProvider";
 import { SessionProvider } from "next-auth/react";
-import GoogleCaptchaProvider from "@/components/providers/GoogleCaptchaProvider";
+import { Toaster } from "react-hot-toast";
 
 const poppins = Poppins({ weight: ["100", "200", "300", "400", "500", "600", "700"], subsets: ["latin-ext"] });
 
@@ -22,9 +22,15 @@ export default function RootLayout({
       <body className={poppins.className}>
         <SessionProvider >
           <NextProvider>
-            <GoogleCaptchaProvider>
               {children}
-            </GoogleCaptchaProvider>
+              <Toaster
+                toastOptions={{
+                  style: {
+                    background: '#333',
+                    color: '#fff',
+                    fontSize: '0.8rem',
+                  }
+                }} />
           </NextProvider>
         </SessionProvider>
       </body>
