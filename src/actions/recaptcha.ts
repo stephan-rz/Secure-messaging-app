@@ -40,7 +40,6 @@ export const Recaptcha = async (token: string) => {
     }
 
     if (response?.data?.success && response?.data?.score > 0.5) {
-        console.log("Score: ", response.data.score)
         return { success: "Recaptcha verified!", score: response.data.score }
     } else {
         return { error: "Recaptcha verification failed!" }

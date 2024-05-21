@@ -4,6 +4,8 @@ Welcome to the Secure Messaging Web App repository! This project aims to provide
 
 **Note: Production URL Under Maintenance (Use locally)**
 
+**Please use Google/ Github signin option because currently email provider only send emails to registered email in the provider until domain verification**
+
 ## Table of Contents
 
 - [Secure Messaging Web App](#secure-messaging-web-app)
@@ -112,7 +114,8 @@ To get a local copy up and running, follow these simple steps.
 
 5. **Build the web app and run** 
     ```bash
-    npm run build && npm start
+    npm run build 
+    npm start
     ```
 
 6. **Open your browser** 

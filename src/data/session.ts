@@ -15,7 +15,6 @@ export function getIp() {
 
     return '0.0.0.0';
 }
-
 export function getUserData(req: NextRequest) {
     const { browser, device, isBot, os, ua } = userAgent(req);
 
