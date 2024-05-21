@@ -21,12 +21,10 @@ Welcome to the Secure Messaging Web App repository! This project aims to provide
 - **User Authentication and Authorization**
   - Email Verification
   - Limiting Login Attempts
-  - Two-Step Verification
-  - Unauthorized Login Detection and Notifications
   - Brute Force Attack Prevention
   - JWTokens
   - Form Validation
-  - Rate Limiting
+  - API Rate Limiting
 
 - **Security Measures**
   - Message Encryption
@@ -53,7 +51,7 @@ To get a local copy up and running, follow these simple steps.
 
 ### Prerequisites
 
-- Node.js (>= 14.x)
+- Node.js (>= 18.x)
 - MongoDB
 - Pusher account for real-time communication
 
@@ -77,41 +75,46 @@ To get a local copy up and running, follow these simple steps.
    ```bash
    DATABASE_URL="mongodb+srv://<username>:<password>@cluster0.mongodb.net/secure-messaging-app"
 
-    NEXTAUTH_SECRET="<your_nextauth_secret>"
+   NEXTAUTH_SECRET="<your_nextauth_secret>"
+   AUTH_TRUST_HOST=true
+   AUTH_URL="http://localhost:3000"
 
-    NEXT_PUBLIC_PUSHER_APP_KEY="<your_pusher_app_key>"
-    PUSHER_APP_ID="<your_pusher_app_id>"
-    PUSHER_SECRET="<your_pusher_secret>"
+   NEXT_PUBLIC_PUSHER_APP_KEY="<your_pusher_app_key>"
+   PUSHER_APP_ID="<your_pusher_app_id>"
+   PUSHER_SECRET="<your_pusher_secret>"
 
-    GITHUB_CLIENT_ID="<your_github_client_id>"
-    GITHUB_CLIENT_SECRET="<your_github_client_secret>"
+   GITHUB_CLIENT_ID="<your_github_client_id>"
+   GITHUB_CLIENT_SECRET="<your_github_client_secret>"
 
-    NEXT_PUBLIC_SITE_URL="http://localhost:3000"
+   NEXT_PUBLIC_SITE_URL="http://localhost:3000"
 
-    GOOGLE_CLIENT_ID="<your_google_client_id>"
-    GOOGLE_CLIENT_SECRET="<your_google_client_secret>"
+   GOOGLE_CLIENT_ID="<your_google_client_id>"
+   GOOGLE_CLIENT_SECRET="<your_google_client_secret>"
 
-    RESEND_API_KEY="<your_resend_api_key>"
+   RESEND_API_KEY="<your_resend_api_key>"
 
-    UPSTASH_REDIS_REST_URL="<your_upstash_redis_rest_url>"
-    UPSTASH_REDIS_REST_TOKEN="<your_upstash_redis_rest_token>"
+   UPSTASH_REDIS_REST_URL="<your_upstash_redis_rest_url>"
+   UPSTASH_REDIS_REST_TOKEN="<your_upstash_redis_rest_token>"
 
-    ENCRYPTION_SECRET_KEY="<your_encryption_secret_key>"
+   ENCRYPTION_SECRET_KEY="<your_encryption_secret_key>"
 
-    NEXT_PUBLIC_RECAPTCHA_KEY="<your_recaptcha_key>"
-    RECAPTCHA_SECRET_KEY="<your_recaptcha_secret_key>"
+   NEXT_PUBLIC_RECAPTCHA_KEY="<your_recaptcha_key>"
+   RECAPTCHA_SECRET_KEY="<your_recaptcha_secret_key>"
+
+   ML_MODEL_URL="http://localhost:3005"
 
     ```
 
-4. **Run database migrations** 
+4. **Run prisma generate** 
     ```bash
-    npx prisma migrate dev --name init
+    npx prisma generate
     ```
 
-5. **Start the development server** 
+5. **Build the web app and run** 
     ```bash
-    npm run dev
+    npm run build && npm start
     ```
+
 6. **Open your browser** 
    
     Visit http://localhost:3000 to see the app in action.
